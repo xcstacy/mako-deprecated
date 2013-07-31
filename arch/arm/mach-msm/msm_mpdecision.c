@@ -109,12 +109,12 @@ static struct msm_mpdec_tuners {
     .startdelay = MSM_MPDEC_STARTDELAY,
     .delay = MSM_MPDEC_DELAY,
     .pause = MSM_MPDEC_PAUSE,
-    .scroff_single_core = true,
+    .scroff_single_core = false,
     .idle_freq = MSM_MPDEC_IDLE_FREQ,
     .max_cpus = CONFIG_NR_CPUS,
     .min_cpus = 1,
 #ifdef CONFIG_MSM_MPDEC_INPUTBOOST_CPUMIN
-    .boost_enabled = true,
+    .boost_enabled = false,
     .boost_time = MSM_MPDEC_BOOSTTIME,
     .boost_freq = {
         MSM_MPDEC_BOOSTFREQ_CPU0,
@@ -131,7 +131,7 @@ static unsigned int TwTs_Threshold[8] = {140, 0, 140, 190, 140, 190, 0, 190};
 extern unsigned int get_rq_info(void);
 extern unsigned long acpuclk_get_rate(int);
 
-unsigned int state = MSM_MPDEC_IDLE;
+unsigned int state = MSM_MPDEC_DISABLED;
 bool was_paused = false;
 #ifdef CONFIG_MSM_MPDEC_INPUTBOOST_CPUMIN
 bool is_screen_on = true;
