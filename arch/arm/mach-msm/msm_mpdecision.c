@@ -49,8 +49,8 @@
 #define MSM_MPDEC_IDLE_FREQ             486000
 #ifdef CONFIG_MSM_MPDEC_INPUTBOOST_CPUMIN
 #define MSM_MPDEC_BOOSTTIME             1000
-#define MSM_MPDEC_BOOSTFREQ_CPU0        918000
-#define MSM_MPDEC_BOOSTFREQ_CPU1        918000
+#define MSM_MPDEC_BOOSTFREQ_CPU0        1026000
+#define MSM_MPDEC_BOOSTFREQ_CPU1        810000
 #define MSM_MPDEC_BOOSTFREQ_CPU2        702000
 #define MSM_MPDEC_BOOSTFREQ_CPU3        594000
 #endif
@@ -109,12 +109,12 @@ static struct msm_mpdec_tuners {
     .startdelay = MSM_MPDEC_STARTDELAY,
     .delay = MSM_MPDEC_DELAY,
     .pause = MSM_MPDEC_PAUSE,
-    .scroff_single_core = false,
+    .scroff_single_core = true,
     .idle_freq = MSM_MPDEC_IDLE_FREQ,
     .max_cpus = CONFIG_NR_CPUS,
     .min_cpus = 1,
 #ifdef CONFIG_MSM_MPDEC_INPUTBOOST_CPUMIN
-    .boost_enabled = false,
+    .boost_enabled = true,
     .boost_time = MSM_MPDEC_BOOSTTIME,
     .boost_freq = {
         MSM_MPDEC_BOOSTFREQ_CPU0,
@@ -125,13 +125,13 @@ static struct msm_mpdec_tuners {
 #endif
 };
 
-static unsigned int NwNs_Threshold[8] = {12, 0, 20, 7, 25, 10, 0, 18};
+static unsigned int NwNs_Threshold[8] = {12, 0, 40, 7, 50, 20, 0, 36};
 static unsigned int TwTs_Threshold[8] = {140, 0, 140, 190, 140, 190, 0, 190};
 
 extern unsigned int get_rq_info(void);
 extern unsigned long acpuclk_get_rate(int);
 
-unsigned int state = MSM_MPDEC_DISABLED;
+unsigned int state = MSM_MPDEC_IDLE;
 bool was_paused = false;
 #ifdef CONFIG_MSM_MPDEC_INPUTBOOST_CPUMIN
 bool is_screen_on = true;
